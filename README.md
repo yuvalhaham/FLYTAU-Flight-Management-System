@@ -1,4 +1,4 @@
-# FLYTAU – Flight Scheduling and Ticketing Management System
+# FLYTAU - Flight Scheduling and Ticketing Management System
 
 ## Project Overview
 FLYTAU is an integrated information system designed to manage the comprehensive lifecycle of airline operations, flight scheduling, and customer reservations. Developed as a final project for a Database Systems Design and Information Systems Engineering course at Tel Aviv University, the platform supports three distinct user roles: guests, registered customers, and operations managers, each with different functionality and access levels.
