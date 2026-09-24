@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Order Confirmed - FlyTau</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="page order-success-page" dir="ltr">
+
+  <div class="container">
+    <div class="card center">
+      <div style="font-size: 50px; margin-bottom: 20px;">✅</div>
+      <h2>Order Created</h2>
+      <p style="color: #64748b; margin-bottom: 30px;">Your flight reservation has been successfully processed.</p>
+
+      <div class="order-details">
+          <p><span>Order ID:</span> <b>#{{ order_id }}</b></p>
+          <p><span>Flight ID:</span> <b>#{{ flight_id }}</b></p>
+          <p><span>Status:</span> <b style="color: #15803d;">Confirmed</b></p>
+      </div>
+
+      <div style="margin-top: 20px;">
+          <a class="btn btn-blue" href="/flights">Back to Flights</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }} - FlyTau</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="page">
+
+    <div class="container">
+        <div class="card" style="max-width: 500px; margin: 10vh auto; text-align: center; padding: 40px;">
+
+            <div style="font-size: 50px; margin-bottom: 20px;">
+                {% if 'Error' in title or 'Cannot' in title %}
+                    ⚠️
+                {% else %}
+                    ℹ️
+                {% endif %}
+            </div>
+
+            <h2 style="margin-bottom: 15px; color: #1e293b;">{{ title }}</h2>
+
+            <p style="color: #64748b; margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6;">
+                {{ message }}
+            </p>
+
+            <a class="btn btn-blue" href="{{ back_href }}" style="display: inline-block; width: auto; padding: 10px 30px;">
+                Go Back
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

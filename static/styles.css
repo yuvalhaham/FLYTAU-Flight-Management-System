@@ -1,0 +1,1753 @@
+/* --- Global Reset & Typography --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* --- Layout for Centered Pages (Login/Register) --- */
+body:not(.page) {
+    background-color: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Main wrapper for split-screen designs */
+.split-container {
+    display: flex;
+    width: 95%;
+    max-width: 1100px;
+    height: 700px;
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Left Side: Branding & Visuals --- */
+.left-side, .split-visual {
+    flex: 1.2;
+    background: linear-gradient(135deg, #007AFF 0%, #003d99 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.badge, .brand-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 20px; color: white; }
+p { font-size: 1.1rem; opacity: 0.9; color: white; }
+
+/* --- Right Side: Form Content --- */
+.right-side, .split-content {
+    flex: 1;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.content-box, .content-wrapper {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo { width: 120px; margin-bottom: 25px; }
+h2 { font-size: 1.8rem; color: #1a1a1a; margin-bottom: 10px; width: 100%; }
+
+/* --- UI Components: Buttons --- */
+.btn, .welcome-btn, .btn-action {
+    display: block; width: 100%; padding: 14px; border-radius: 10px;
+    text-decoration: none; text-align: center; font-weight: 600;
+    font-size: 14px; margin-bottom: 12px; transition: 0.2s;
+    border: none; cursor: pointer;
+}
+
+.btn-blue, .primary { background: #007AFF; color: white; }
+.btn-gray, .secondary { background: #f4f7fa; color: #4a5568; border: 1px solid #e2e8f0; }
+.outline { border: 2px solid #007AFF; color: #007AFF; background: white; }
+
+/* --- Form Elements --- */
+.form-group, .input-container {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Labels for standard login forms */
+body:not(.page) label {
+    font-size: 10px; color: #aaa; margin-bottom: 4px;
+    text-transform: uppercase; font-weight: bold; display: block;
+}
+
+/* Minimalist inputs for split-screen forms */
+input:not(.filter-input) {
+    width: 100%; border: none; border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0; outline: none; font-size: 15px; background: transparent; transition: 0.3s;
+}
+
+/* --- Internal Content Pages (e.g., Flights List) --- */
+body.page {
+    background-color: #f0f4f8;
+    display: block;
+    padding: 60px 5%;
+}
+
+.page .container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.page .card {
+    background: white; border-radius: 20px; padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    width: 100%;
+}
+
+/* --- Search & Filter Bar Styling --- */
+.page .filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    align-items: flex-end;
+    background: #f4f7fa;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.page .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.page .filters input {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    min-width: 160px;
+}
+
+/* --- Data Table Styling --- */
+.page table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.page th {
+    text-align: left; padding: 15px; color: #888; font-size: 11px;
+    text-transform: uppercase; border-bottom: 2px solid #f0f4f8; letter-spacing: 1px;
+}
+
+.page td {
+    padding: 18px 15px;
+    border-bottom: 1px solid #f0f4f8;
+    font-size: 14px;
+    color: #333;
+}
+
+.page tbody tr:nth-child(even) { background-color: #fafbfc; }
+.page tr:hover { background: #f1f5f9; }
+
+/* --- Status Indicators --- */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+.status-scheduled { background: #e0f2fe; color: #0369a1; }
+.status-cancelled { background: #fee2e2; color: #b91c1c; }
+.status-landed { background: #f0fdf4; color: #15803d; }
+
+/* --- Internal Form Interaction --- */
+.page .card input:focus,
+.page .card select:focus {
+    border-color: #007AFF !important;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* --- Error Feedback --- */
+.error-message {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #fecaca;
+    width: 100%;
+}
+
+/* --- Seat Selection Page Scope (Only affects seat booking) --- */
+
+.seat-selection-page .seat-grid {
+    display: grid;
+    gap: 8px;
+    align-items: center;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.seat-selection-page .seat,
+.seat-selection-page .row-label,
+.seat-selection-page .col-label,
+.seat-selection-page .corner {
+    width: 36px; height: 36px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; user-select: none;
+    box-sizing: border-box; transition: all 0.2s;
+}
+
+/* Seats States - Scoped */
+.seat-selection-page .seat.available { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; cursor: pointer; }
+.seat-selection-page .seat.available:hover { transform: scale(1.1); background: #2ecc71; color: white; }
+.seat-selection-page .seat.occupied { background: #f1f5f9; color: #94a3b8; border: 1px solid #e2e8f0; cursor: not-allowed; }
+.seat-selection-page .seat.selected { background: #007AFF; color: white; border: 1px solid #0056b3; cursor: pointer; box-shadow: 0 0 10px rgba(0, 122, 255, 0.4); }
+
+/* Layout & Legend - Scoped */
+.seat-selection-page .class-box { margin-top: 25px; padding-bottom: 25px; border-bottom: 1px solid #f1f5f9; }
+.seat-selection-page .class-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.seat-selection-page .price-tag { color: #007AFF; font-weight: 800; font-size: 1.1rem; }
+.seat-selection-page .legend { display: flex; gap: 20px; justify-content: center; margin: 25px 0; padding: 15px; background: #f8fafc; border-radius: 10px; }
+.seat-selection-page .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b; font-weight: 600; }
+.seat-selection-page .dot { width: 16px; height: 16px; border-radius: 4px; display: inline-block; }
+
+/* --- Order Success Page Specific Styling --- */
+
+/* Centers the card specifically for the success page */
+.order-success-page .card.center {
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: center;
+    padding: 50px 40px;
+}
+
+/* Success title styling */
+.order-success-page h2 {
+    color: #15803d; /* Dark green for success */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Container for order details (ID and Flight) */
+.order-success-page .order-details {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* Layout for each detail line */
+.order-success-page .order-details p {
+    color: #475569;
+    font-size: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Emphasis for IDs */
+.order-success-page .order-details b {
+    color: #1e293b;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+}
+
+/* Hover effect for the action button on this page */
+.order-success-page .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
+}
+
+/* --- Cancel Flight Page Specific Styling --- */
+
+/* Limits the card width and centers it for a focused layout */
+.cancel-flight-page .card {
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+/* Header styling with a warning color */
+.cancel-flight-page h2 {
+    color: #b91c1c; /* Danger red */
+    margin-bottom: 20px;
+}
+
+/* Adds a warning description for the manager */
+.cancel-flight-page .warning-text {
+    background-color: #fef2f2;
+    border-left: 4px solid #b91c1c;
+    padding: 15px;
+    margin-bottom: 25px;
+    color: #991b1b;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Styling for the flight ID display (disabled input or read-only feel) */
+.cancel-flight-page input[name="flight_id"] {
+    background-color: #f8fafc;
+    font-weight: bold;
+    color: #475569;
+    border-bottom: 2px solid #e2e8f0;
+    cursor: not-allowed;
+}
+
+/* Specific button styling for a destructive action */
+.cancel-flight-page .btn-cancel {
+    background-color: #b91c1c;
+    color: white;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.cancel-flight-page .btn-cancel:hover {
+    background-color: #991b1b;
+    box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
+}
+
+/* Footer link styling */
+.cancel-flight-page .footer {
+    margin-top: 25px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+/* --- 1. Cancel Flight REQUEST Page (The HTML you just sent) --- */
+
+/* Scoping for the initial cancellation request */
+.cancel-flight-page .card {
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+/* Red header for warning */
+.cancel-flight-page h2 {
+    color: #b91c1c;
+    margin-bottom: 20px;
+}
+
+/* Warning box styling */
+.cancel-flight-page .warning-text {
+    background-color: #fef2f2;
+    border-left: 4px solid #b91c1c;
+    padding: 15px;
+    margin-bottom: 25px;
+    color: #991b1b;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Red button for destructive action */
+.cancel-flight-page .btn-cancel {
+    background-color: #b91c1c;
+    color: white;
+    margin-top: 20px;
+}
+
+.cancel-flight-page .btn-cancel:hover {
+    background-color: #991b1b;
+}
+
+/* --- 2. Cancel Flight SUCCESS Page (The screenshot page) --- */
+
+/* Scoping for the page shown AFTER cancellation is done */
+.cancel-success-page .card {
+    max-width: 550px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 40px;
+    border-top: 5px solid #b91c1c;
+}
+
+/* Icon and Message styling */
+.cancel-success-page .status-icon {
+    width: 60px; height: 60px;
+    background-color: #fef2f2; color: #b91c1c;
+    border-radius: 50%; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 30px; margin: 0 auto 20px;
+}
+
+.cancel-success-page .message-box {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 20px; border-radius: 10px;
+    color: #475569; font-size: 15px;
+    line-height: 1.6; margin-bottom: 30px;
+}
+
+.cancel-success-page .highlight {
+    color: #b91c1c; font-weight: bold;
+}
+/* --- Book Flight Page Specific Styling --- */
+
+/* Scoping for the booking form page */
+.book-flight-page .card {
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+/* Styling for labels in the booking form */
+.book-flight-page label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+
+/* Modern styling for the dropdown (select) and number input */
+.book-flight-page select,
+.book-flight-page input[type="number"],
+.book-flight-page input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    font-size: 15px;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.2s;
+}
+
+/* Focus state for form elements */
+.book-flight-page select:focus,
+.book-flight-page input:focus {
+    border-color: #007AFF;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* Success/Action button for placing order */
+.book-flight-page .btn {
+    background: #007AFF;
+    color: white;
+    margin-top: 25px;
+}
+
+.book-flight-page .btn:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* --- Book Summary Page Specifics --- */
+
+.summary-card {
+    /* שינוי רוחב: הרחבתי ל-800px כדי שיהיה מלבן יפה ורחב */
+    max-width: 800px;
+    margin: 60px auto;
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.summary-card h2 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #1e293b;
+    font-size: 2rem;
+    text-align: center; /* כותרת ממורכזת נראית טוב יותר בכרטיס רחב */
+}
+
+.summary-card .section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.summary-card .section:last-child {
+    border-bottom: none;
+}
+
+.summary-card h3 {
+    color: #64748b;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+/* --- תיקון הצבע הלבן --- */
+/* אנחנו מכריחים את הטקסט בתוך הכרטיס להיות כהה */
+.summary-card p {
+    color: #334155 !important; /* אפור כהה במקום לבן */
+    font-size: 16px;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.summary-card strong {
+    color: #0f172a; /* שחור עבור התוויות */
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+/* עיצוב רשימת המושבים */
+.summary-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid; /* תצוגה בגריד כדי לנצל את הרוחב החדש */
+    grid-template-columns: 1fr 1fr; /* שני מושבים בשורה */
+    gap: 10px;
+}
+
+.summary-card li {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #334155;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* אזור המחיר והכפתור */
+.summary-card .total-section {
+    margin-top: 30px;
+    text-align: left; /* שיניתי מימין לשמאל */
+    border-top: 1px solid #f1f5f9; /* הוספתי קו הפרדה עדין */
+    padding-top: 20px;
+}
+
+.summary-card .total-price {
+    font-size: 2.5rem;
+    color: #22c55e;
+    font-weight: 800;
+    margin: 5px 0 20px 0;
+}
+
+.summary-card .confirm-btn {
+    background-color: #22c55e;
+    color: white;
+    padding: 18px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+.summary-card .confirm-btn:hover {
+    background-color: #16a34a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(34, 197, 94, 0.3);
+}
+
+/* --- Guest My Order Page Specific Styling --- */
+
+/* Limits the card width for a focused form layout */
+.guest-order-page .card {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 40px;
+}
+
+/* Header styling */
+.guest-order-page h2 {
+    margin-bottom: 25px;
+    color: #1a1a1a;
+    text-align: center;
+}
+
+/* Modern labels */
+.guest-order-page label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 8px;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+
+/* Styled inputs for the form */
+.guest-order-page input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    margin-bottom: 5px;
+}
+
+/* Highlight focus state */
+.guest-order-page input:focus {
+    border-color: #007AFF;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    outline: none;
+}
+
+/* Action button styling */
+.guest-order-page .btn {
+    background: #007AFF;
+    color: white;
+    margin-top: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 122, 255, 0.2);
+}
+
+.guest-order-page .btn:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Footer link styling */
+.guest-order-page .footer {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+/* --- Order Details Page Specific Styling --- */
+
+/* Scoping for the order details view */
+.order-details-page .card {
+    max-width: 650px;
+    margin: 40px auto;
+}
+
+/* Organizing details into a list format */
+.order-details-page .detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.order-details-page .detail-item b {
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.order-details-page .detail-value {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Seats list styling */
+.order-details-page ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.order-details-page li {
+    background: #f8fafc;
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+}
+
+/* Muted/Info text */
+.order-details-page .muted {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Destructive action button (Red style) */
+.order-details-page .btn-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.order-details-page .btn-danger:hover {
+    background-color: #b91c1c;
+    color: white;
+}
+
+/* --- Cancel Order Page Specific Styling --- */
+
+/* Scoping for the user's order cancellation page */
+.cancel-order-page .card {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 40px;
+}
+
+/* Red header for cancellation */
+.cancel-order-page h2 {
+    color: #b91c1c;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Label styling */
+.cancel-order-page label {
+    display: block;
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Input field styling */
+.cancel-order-page input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    outline: none;
+    font-size: 15px;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.cancel-order-page input:focus {
+    border-bottom: 2px solid #b91c1c;
+}
+
+/* Destruction action button */
+.cancel-order-page .btn-cancel {
+    background-color: #b91c1c;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.cancel-order-page .btn-cancel:hover {
+    background-color: #991b1b;
+    box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
+}
+
+/* --- Seat Selection Page Scope (Updates for selection) --- */
+
+/* Basic Seat - Standard look */
+.seat-selection-page .seat.available {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    cursor: pointer;
+}
+
+/* Hover effect for available seats */
+.seat-selection-page .seat.available:hover {
+    transform: scale(1.1);
+    background: #bbf7d0;
+    border-color: #86efac;
+}
+
+/* Selected state - Triggered by JS adding .selected class */
+.seat-selection-page .seat.selected {
+    background-color: #007AFF !important; /* Force Tau blue */
+    color: white !important;
+    border: 1px solid #0056b3 !important;
+    box-shadow: 0 0 10px rgba(0, 122, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.seat-selection-page .seat.occupied {
+    background: #f1f5f9;
+    color: #94a3b8;
+    border: 1px solid #e2e8f0;
+    cursor: not-allowed;
+}
+
+.seat-selection-page .seat {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+    min-width: 150px;
+}
+
+.filter-select:hover {
+    border-color: #bbb;
+}
+
+.filter-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.filter-select option {
+    padding: 10px;
+}
+/* Container for the topbar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #f8f9fa; /* Light background for the bar */
+    border-bottom: 1px solid #eee;
+}
+
+/* Container that holds the buttons on the right */
+.topbar-actions {
+    display: flex;
+    flex-direction: row; /* Forces horizontal alignment */
+    gap: 12px;           /* Space between buttons */
+    margin-left: auto;   /* Pushes the whole group to the right */
+}
+
+/* Styling for the buttons themselves */
+.btn.small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap; /* CRITICAL: Prevents text from breaking into 2 lines */
+    transition: all 0.2s ease;
+    height: 40px;       /* Uniform height */
+    min-width: 100px;   /* Ensures they look balanced */
+}
+
+/* Colors for the specific buttons */
+.btn-gray {
+    background-color: #ffffff;
+    color: #495057;
+    border: 1px solid #dee2e6;
+}
+
+.btn-gray:hover {
+    background-color: #f1f3f5;
+}
+
+.btn-blue {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+}
+
+.btn-blue:hover {
+    background-color: #2563eb;
+}
+
+/* Title styling - ensuring it is blue on this specific page */
+.flights-title {
+    color: #007bff !important;
+    font-size: 2.5rem;
+    margin-top: 30px;
+    font-weight: bold;
+}
+/* Styling specifically for the passenger details section to avoid conflicts */
+#passenger-details-section {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#passenger-details-section .details-form {
+    flex: 2;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
+}
+
+#passenger-details-section .order-summary {
+    flex: 1;
+    border: 1px solid #007bff;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    height: fit-content;
+}
+
+#passenger-details-section .form-group {
+    margin-bottom: 15px;
+}
+
+#passenger-details-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#passenger-details-section input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#passenger-details-section .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#passenger-details-section .btn:hover {
+    background-color: #0056b3;
+}
+
+#passenger-details-section .error-box {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+/* עיצוב ייחודי לדף פרטי נוסע - לא משפיע על דפים אחרים */
+#passenger-details-section {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#passenger-details-section .details-form {
+    flex: 2;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
+}
+
+#passenger-details-section .order-summary {
+    flex: 1;
+    border: 1px solid #007bff;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    height: fit-content;
+}
+
+#passenger-details-section .form-group {
+    margin-bottom: 15px;
+}
+
+#passenger-details-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#passenger-details-section input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#passenger-details-section .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#passenger-details-section .btn:hover {
+    background-color: #0056b3;
+}
+
+#passenger-details-section .error-box {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+/* --- Flights Page Styles --- */
+
+/* Main container and layout */
+.page {
+    background-color: #f8fafc; /* Light gray background for better contrast */
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.flights-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: #0f172a;
+}
+
+/* Filter Section Styling */
+.filters {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 32px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 150px;
+}
+
+.filter-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.025em;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+}
+
+.filter-group input:focus {
+    outline: none;
+    border-color: #007AFF;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* Table and Card Styling */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensures borders wrap the table */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead th {
+    background-color: #f1f5f9;
+    padding: 14px 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #475569;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody td {
+    padding: 16px 20px;
+    font-size: 0.925rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Status Badge Styles */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-scheduled { background-color: #dcfce7; color: #166534; }
+.status-cancelled { background-color: #fee2e2; color: #991b1b; }
+.status-landed    { background-color: #f1f5f9; color: #475569; }
+.status-booked    { background-color: #fef3c7; color: #92400e; }
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-blue { background-color: #007AFF; color: white; }
+.btn-blue:hover { background-color: #0056b3; }
+
+.btn-gray { background-color: #e2e8f0; color: #475569; }
+.btn-gray:hover { background-color: #cbd5e1; }
+
+.small { padding: 6px 12px; font-size: 0.8rem; }
+
+/* Utility */
+.text-right { text-align: right; }
+.text-muted { color: #94a3b8; }
+
+/* --- Top Navigation Bar Styling --- */
+
+/* The main container for the top navigation */
+.topbar {
+    display: flex;
+    justify-content: space-between; /* Identity on the left, buttons on the right */
+    align-items: center;
+    background: white;
+    padding: 15px 30px;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Container for all buttons on the right side */
+.topbar-actions {
+    display: flex;
+    gap: 12px; /* Fixed spacing between all buttons */
+    align-items: center;
+}
+
+/* Ensure buttons don't shrink or wrap to a new line */
+.btn.small {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap; /* Keeps "+ Add Flight" and "Logout" on one line */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Specific styling for the Logout/Primary blue buttons */
+.btn-blue {
+    background-color: #3b82f6; /* Modern Blue */
+    color: white;
+}
+
+.btn-blue:hover {background-color: #2563eb; transform: translateY(-1px);}
+
+/* Specific styling for 'My Orders' gray buttons */
+.btn-gray {    background-color: #f1f5f9; color: #475569;}
+
+.btn-gray:hover {background-color: #e2e8f0;}
+
+/* --- Responsive fix --- */
+@media (max-width: 600px) {
+    .topbar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+
+/* Style for read-only inputs (Registered Users) */
+input.readonly-input {
+    background-color: #f1f5f9; /* Light gray background */
+    color: #64748b;            /* Muted text color */
+    cursor: not-allowed;
+    border-color: #e2e8f0;
+}
+
+
+
+/* --- Add Flight Specific Styles --- */
+
+/* Step label styling (e.g. "Step 1 of 2") */
+.step-label {
+    color: #3b82f6;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Form inputs specific for data entry (Full border instead of underline) */
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Info Box for Route Details (Step 2) */
+.info-box {
+    background: #f0f9ff;
+    padding: 20px;
+    border-left: 5px solid #3b82f6;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    color: #1e3a8a;
+    text-align: left;
+}
+
+/* Sections for Staff Selection */
+.staff-section {
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+/* Grid Layout for Crew Dropdowns */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Badges for Flight Type */
+.type-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-left: 5px;
+}
+.type-badge.Long { background: #ef4444; color: white; }
+.type-badge.Short { background: #10b981; color: white; }
+
+/* Success Button (Green) */
+.btn-success {
+    background-color: #10b981;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-success:hover { background-color: #059669; }
+
+/* Error Alert */
+.alert-error {
+    color: #b91c1c;
+    background: #fee2e2;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #fecaca;
+    text-align: left;
+}
+
+/* Hide number arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+
+
+/* --- Reports Page Specifics --- */
+
+.chart-placeholder-container {
+    min-height: 450px;
+    background: #f8fafc; /* Light gray background matching inputs */
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #cbd5e1; /* Dashed border */
+    margin-top: 30px;
+    color: #64748b;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.chart-placeholder-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+/* 1. Reset and Full Center - Fixes the alignment of the entire box */
+body { display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f2f5; padding: 20px; box-sizing: border-box; }
+
+/* 2. Main Container - Wider to give more room for inputs */
+.split-container { display: flex; width: 100%; max-width: 1050px; background: white; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden; margin: auto; }
+
+/* 3. Sides Styling */
+.left-side { flex: 1; background: linear-gradient(135deg, #007AFF, #0051A8); color: white; padding: 40px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.right-side { flex: 1.3; padding: 40px; background: white; display: flex; flex-direction: column; justify-content: center; color: #333; }
+
+/* 4. Centered Phone Section with Dark Text */
+.staff-section { text-align: center; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin: 10px 0; }
+.staff-section label { color: #1e293b !important; font-weight: bold; display: block; margin-bottom: 5px; font-size: 17px; }
+.section-help { color: #64748b !important; font-size: 12px; margin-bottom: 12px; display: block; }
+
+/* 5. Phone Grid - 2 per row with smaller font to prevent cutting */
+.phone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; }
+.phone-grid input {
+    color: #1e293b !important;
+    background: white;
+    border: 1px solid #cbd5e1;
+    padding: 10px 5px;
+    border-radius: 6px;
+    font-size: 11px; /* Reduced size so text fits */
+}
+
+/* 6. General Form Elements */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
+input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+
+/* Container to center everything on the screen */
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh; /* Centers vertically relative to viewport */
+    padding: 20px;
+}
+
+.form-title {
+    color: #2563eb; /* Blue color from screenshot */
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+/* The white card */
+.route-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 500px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.field-label {
+    display: block;
+    font-weight: bold;
+    font-size: 11px; /* Consistent with your manager table font */
+    color: #6b7280;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    ring: 2px rgba(37, 99, 235, 0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px !important;
+    font-weight: bold;
+    font-size: 14px !important;
+    margin-top: 10px;
+}
+
+.error-banner {
+    color: #b91c1c;
+    background-color: #fef2f2;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 13px;
+    border: 1px solid #fecaca;
+}
+
+/* --- No-Script Seat Selection Logic --- */
+
+/* 1. מסתירים את הצ'קבוקס האמיתי אבל משאירים אותו פעיל בדף */
+.seat-checkbox {
+    display: none;
+}
+
+/* 2. עיצוב למושב שנבחר */
+/* המשמעות: אם הצ'קבוקס מסומן, האלמנט מסוג label שבא מיד אחריו יקבל את העיצוב הכחול */
+.seat-checkbox:checked + .seat {
+    background-color: #007AFF !important;
+    color: white !important;
+    border: 1px solid #0056b3 !important;
+    box-shadow: 0 0 10px rgba(0, 122, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* 3. מניעת לחיצה על מושבים תפוסים */
+.seat.occupied {
+    pointer-events: none; /* מונע לחיצה */
+    opacity: 0.7;
+}
+
+
+
+
+/* --- Generic Form Utilities (Reusable) --- */
+
+/* כרטיס צר וממורכז לטפסים */
+.card-narrow {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+/* שורה בטופס (לסידור שדות אחד ליד השני) */
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+/* יחס רוחב לעמודות (1 יחידה, 2 יחידות) */
+.col-1 { flex: 1; }
+.col-2 { flex: 2; }
+
+/* גורם ל-Select להיראות בדיוק כמו ה-Input שלך */
+select {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background: transparent;
+    outline: none;
+    font-size: 15px;
+    color: #333;
+}
+
+
+
+/* --- Form Grouping Sections (For complex forms like Add Plane) --- */
+
+.form-section {
+    background: #f8fafc; /* הרקע האפור */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.form-section h3 {
+    font-size: 12px;
+    color: #007AFF;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.form-section h4 {
+    font-size: 14px;
+    color: #475569;
+    margin: 20px 0 10px 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+.help-text {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+
+/* --- Booking Page Specifics --- */
+
+/* הגבלת רוחב לעמודים צרים (כמו הזמנה) */
+.narrow-layout {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* שורת כותרת עם ניווט */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.user-status {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* כותרות עמוד כהות (דורס את ה-h1 הלבן הכללי) */
+.page-title {
+    color: #1e293b;
+    margin-bottom: 10px;
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+
+.page-subtitle {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* תוויות טופס קטנות ומודגשות */
+.form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+/* שדות קלט עם מסגרת (Boxed) - דורס את ברירת המחדל המינימליסטית */
+input.form-input, select.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 15px;
+    background: white;
+    outline: none;
+    margin-bottom: 0;
+}
+
+/* רקע שונה ל-Select כדי שייראה טוב */
+select.form-input {
+    background-color: #f8fafc;
+}
+
+/* פוקוס כחול */
+input.form-input:focus, select.form-input:focus {
+    border-color: #007AFF;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* כפתור ברוחב מלא */
+.btn-full {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.secure-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* --- Success Page Utilities --- */
+
+/* אייקון אימוג'י גדול */
+.big-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+/* רשימת כפתורים אנכית (אחד מתחת לשני) */
+.action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* כותרת כהה לדפי הצלחה (במקום הירוק של ברירת המחדל אם רוצים) */
+.success-title {
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+
+/* --- Order Details Cleanup --- */
+
+/* הופך את השורה ברשימה לגמישה (מושב בצד אחד, מחלקה בצד שני) */
+.order-details-page li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* צבע כחול מודגש למחלקת הטיסה (בתוך הרשימה) */
+.text-blue-bold {
+    color: #007AFF;
+    font-weight: 700;
+}
+
+/* קופסת הודעה אפורה (כמו ההערה על הביטול) */
+.notice-box {
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 8px;
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* מרכוז הכפתורים למטה */
+.footer-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+
+/* --- Reports Page Specifics --- */
+
+/* עיצוב התמונה של הגרף */
+.chart-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+/* קופסת ההסבר הכחולה (Insight Box) */
+.insight-box {
+    margin: 20px auto; /* מרכוז */
+    padding: 25px;
+    background-color: #e7f5ff; /* רקע תכלת */
+    border: 1px solid #b3d7ff; /* מסגרת כחולה */
+    color: #0f172a;
+    border-radius: 12px;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 900px;
+}
+
+/* הדגשה בתוך הקופסה */
+.insight-box strong {
+    color: #007bff;
+    font-size: 1.1rem;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Flight - Step 2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="page">
+    <div class="container">
+        <div class="wizard-container wide">
+            <h2>Step 2: Assign Plane & Crew</h2>
+
+            <div class="info-box">
+                <strong>Selected Route:</strong> {{ route_info.SourceAirport }} to {{ route_info.DestinationAirport }} <br>
+                <strong>Flight Type:</strong>
+                <span class="type-badge {{ flight_type }}">
+                    {{ flight_type }}
+                </span>
+            </div>
+
+            {% if error %}
+            <div class="error-message">
+                <strong>Error:</strong> {{ error }}
+            </div>
+            {% endif %}
+
+            <form action="/add_flight?step=2" method="POST">
+
+                <div class="staff-section">
+                    <label><strong>Assign Available Plane:</strong></label>
+                    <select name="plane_id" class="form-control" required>
+                        <option value="" disabled selected>Choose a plane...</option>
+                        {% for plane in planes %}
+                            <option value="{{ plane.PlaneID }}">
+                                {{ plane.PlaneID }} - {{ plane.Manufacturer }} ({{ plane.PlaneSize }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="staff-section">
+                    <h3>Pilots Assignment</h3>
+                    <p class="section-help" style="color: #333; margin-bottom: 10px;">Assign 2 pilots for Small planes, 3 for Large planes.</p>
+                    <div class="staff-grid">
+                        <div>
+                            <label>Pilot 1 (Required):</label>
+                            <select name="pilot_1" class="form-control" required>
+                                <option value="">-- Select Pilot --</option>
+                                {% for p in pilots %}
+                                    <option value="{{ p.PilotID }}">{{ p.FirstName }} {{ p.LastName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label>Pilot 2 (Required):</label>
+                            <select name="pilot_2" class="form-control" required>
+                                <option value="">-- Select Pilot --</option>
+                                {% for p in pilots %}
+                                    <option value="{{ p.PilotID }}">{{ p.FirstName }} {{ p.LastName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label>Pilot 3 (Large Plane Only):</label>
+                            <select name="pilot_3" class="form-control">
+                                <option value="">-- Optional / Empty --</option>
+                                {% for p in pilots %}
+                                    <option value="{{ p.PilotID }}">{{ p.FirstName }} {{ p.LastName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-section">
+                    <h3>Flight Attendants Assignment</h3>
+                    <p class="section-help" style="color: #333; margin-bottom: 10px;">Assign 3 attendants for Small planes, 6 for Large planes.</p>
+                    <div class="staff-grid">
+                        {% for i in range(1, 4) %}
+                        <div>
+                            <label>Attendant {{ i }} (Required):</label>
+                            <select name="attendant_{{ i }}" class="form-control" required>
+                                <option value="">-- Select Attendant --</option>
+                                {% for a in attendants %}
+                                    <option value="{{ a.AttendantID }}">{{ a.FirstName }} {{ a.LastName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endfor %}
+
+                        {% for i in range(4, 7) %}
+                        <div>
+                            <label>Attendant {{ i }} (Large Plane Only):</label>
+                            <select name="attendant_{{ i }}" class="form-control">
+                                <option value="">-- Optional / Empty --</option>
+                                {% for a in attendants %}
+                                    <option value="{{ a.AttendantID }}">{{ a.FirstName }} {{ a.LastName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="staff-section">
+                    <h3>Ticket Pricing (ILS)</h3>
+                    <div class="staff-grid">
+                        <div>
+                            <label>Economy Class:</label>
+                            <input type="number" name="price_eco" step="0.01" min="0" class="form-control" required placeholder="e.g. 1000">
+                        </div>
+                        <div>
+                            <label>Business Class:</label>
+                            <input type="number" name="price_bus" step="0.01" min="0" class="form-control" required placeholder="e.g. 3000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wizard-actions">
+                    <button type="submit" class="btn btn-success">Finalize & Create Flight</button>
+                    <a href="/add_flight?step=1" class="btn btn-gray">← Back to Step 1</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

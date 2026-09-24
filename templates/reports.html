@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>FlyTau - Management Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="page reports-page">
+
+    <nav class="topbar">
+        <div class="logo">
+            <h2 style="color: #007bff; margin: 0;">FlyTau Reports</h2>
+        </div>
+        <div class="topbar-actions">
+             <a class="btn btn-blue small" href="/flights"> Back </a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <h1 class="flights-title" style="text-align: center;">Management Reports Dashboard</h1>
+
+        <div class="card">
+
+            <form method="POST" action="/reports" class="filters" style="justify-content: center; align-items: center;">
+                <div class="filter-group">
+                    <label>Select Report Type:</label>
+                    <select id="reportType" name="report_type" style="min-width: 300px;">
+                        <option value="" disabled {% if not selected_report %}selected{% endif %}>-- Please select a report --</option>
+                        <option value="occupancy" {% if selected_report == 'occupancy' %}selected{% endif %}>Average Flight Occupancy</option>
+                        <option value="revenue" {% if selected_report == 'revenue' %}selected{% endif %}>Revenue Analysis (Aircraft & Class)</option>
+                        <option value="crew_hours" {% if selected_report == 'crew_hours' %}selected{% endif %}>Crew Flight Hours</option>
+                        <option value="cancellations" {% if selected_report == 'cancellations' %}selected{% endif %}>Monthly Cancellation Rate</option>
+                        <option value="fleet_activity" {% if selected_report == 'fleet_activity' %}selected{% endif %}>Fleet Activity Summary</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-blue" style="height: 42px; margin-top: 18px;">Generate Report</button>
+            </form>
+
+            <div style="text-align: center; padding: 20px;">
+
+                {% if error %}
+                    <div class="error-message">⚠️ {{ error }}</div>
+
+                {% elif chart_image %}
+
+                    <img src="data:image/png;base64,{{ chart_image }}" class="chart-img" alt="Report Chart">
+
+                    {% if selected_report == 'occupancy' %}
+                        <div class="insight-box">
+                            <strong>Utilization Insight:</strong><br><br>
+                            The graph shows the percentage of seats actually sold (reservations in the 'completed' status) out of the total aircraft capacity, on average for all flights that landed.
+                            In the current case, this occupancy rate indicates a critical situation in which the planes took off almost completely empty. This figure indicates an extreme mismatch between flight supply and actual demand.
+                        </div>
+
+                    {% elif selected_report == 'revenue' %}
+                        <div class="insight-box">
+                            <strong>Revenue Breakdown:</strong><br><br>
+                            The report shows total revenue broken down by aircraft size, manufacturer, and seating class.<br>
+                            The calculation is performed proportionally to accurately attribute revenue even from orders that combine multiple classes.
+                            <br><br>Note: For canceled flights, the class registration will be NONE.
+                        </div>
+
+                    {% elif selected_report == 'crew_hours' %}
+                        <div class="insight-box">
+                            <strong>Crew Hours and Workload Analysis:</strong><br><br>
+                            The graph shows the 15 most active crew members (pilots and flight attendants), based on cumulative hours on completed flights.<br>
+                            This metric is critical for monitoring crew fatigue and regulatory compliance.
+                        </div>
+
+                    {% elif selected_report == 'cancellations' %}
+                        <div class="insight-box">
+                            <strong>Monthly Cancellation Rate Analysis:</strong><br><br>
+                            The graph shows the percentage of orders that were canceled at the customer’s initiative each month.<br>
+                            An increase in cancellation rate may indicate problems with pricing, service, or the ordering process.
+                        </div>
+
+                    {% elif selected_report == 'fleet_activity' %}
+                        <div class="insight-box">
+                            <strong>Fleet Activity Summary:</strong><br><br>
+                            The report provides a monthly snapshot of the performance of each aircraft in the fleet:<br><br>
+                            <div style="text-align: left; display: inline-block; max-width: 600px;">
+                                1. <b>Utilization Rate</b> - percentage of time aircraft was in the air.<br>
+                                2. <b>Operational Reliability</b> - flights operated vs. canceled.<br>
+                                3. <b>Dominant Route</b> - the most frequent route operated.<br>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                {% else %}
+                    <div class="chart-placeholder-container">
+                        <div class="placeholder-icon">📊</div>
+                        <div class="chart-placeholder-text">
+                            Please select a report type above and click Generate.
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

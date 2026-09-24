@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>FlyTau - Welcome</title>
+</head>
+<body class="welcome-body" dir="ltr">
+    <div class="split-container">
+        <div class="split-visual">
+            <div class="visual-text-container">
+                <div class="brand-badge">FLYTAU</div>
+                <h1>Your Journey<br>Starts Here</h1>
+                <p>Explore the world with ease and comfort</p>
+            </div>
+        </div>
+
+        <div class="split-content">
+            <div class="content-wrapper">
+                <img src="{{ url_for('static', filename='flytau_logo.jpeg') }}" class="logo">
+                <h2>Welcome to FlyTau</h2>
+                <p class="subtitle">Please select your login method</p>
+
+                <div class="btn-group" style="width: 100%;">
+                    <a href="/login_registered" class="btn primary">Registered Customer Login</a>
+                    <a href="/guest" class="btn secondary">Guest Login</a>
+                    <a href="/login_manager" class="btn secondary">Manager Login</a>
+
+                    <div class="divider-container" style="display: flex; align-items: center; margin: 20px 0; color: #ccc;">
+                        <span style="flex: 1; height: 1px; background: #eee;"></span>
+                        <span style="margin: 0 10px; font-size: 10px; font-weight: bold;">OR</span>
+                        <span style="flex: 1; height: 1px; background: #eee;"></span>
+                    </div>
+
+                    <a href="/register" class="btn outline">Create New Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

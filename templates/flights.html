@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>FlyTau - Available Flights</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="page">
+    <div class="topbar">
+        <div>Signed in as: <b>{{ user_type }}</b></div>
+        <div class="topbar-actions" style="display: flex; gap: 10px; align-items: center;">
+          {% if user_type == "manager" %}
+            <a class="btn btn-blue small" href="/add_flight">+ Add Flight</a>
+            <a class="btn btn-blue small" href="/add_route">+ Add Route</a>
+            <a class="btn btn-blue small" href="/add_pilot">+ Add Pilot</a>
+            <a class="btn btn-blue small" href="/add_attendant">+ Add Attendant</a>
+            <a class="btn btn-blue small" href="/crew">View Crew</a>
+            <a class="btn btn-blue small" href="/add_plane">+ Add Plane</a>
+            <a class="btn btn-blue small" href="/reports"> Reports </a>
+          {% endif %}
+
+          {% if user_type == "registered" %}
+            <a class="btn btn-gray small" href="/my_orders">My Orders</a>
+          {% elif user_type == "guest" %}
+            <a class="btn btn-gray small" href="/guest_my_order">My Order</a>
+          {% endif %}
+
+          <a class="btn btn-blue small" href="/logout">Logout</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" style="padding: 15px; background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; margin-bottom: 20px; border-radius: 8px; text-align: center; font-weight: bold;">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <h1 class="flights-title">Available Flights</h1>
+
+        <form class="filters" method="GET" action="/flights">
+
+            <div class="filter-group">
+                <label>Origin</label>
+                <input type="text" name="source" placeholder="Origin" value="{{ request.args.get('source', '') }}">
+            </div>
+
+            <div class="filter-group">
+                <label>Destination</label>
+                <input type="text" name="destination" placeholder="Destination" value="{{ request.args.get('destination', '') }}">
+            </div>
+
+            <div class="filter-group">
+                <label>From Dep. Date</label>
+                <input type="date" name="date_from" value="{{ request.args.get('date_from', '') }}">
+            </div>
+            <div class="filter-group">
+                <label>To Dep. Date</label>
+                <input type="date" name="date_to" value="{{ request.args.get('date_to', '') }}">
+            </div>
+
+            <div class="filter-group">
+                <label>Arrival Date</label>
+                <input type="date" name="arrival_date" value="{{ request.args.get('arrival_date', '') }}">
+            </div>
+
+            {% if user_type == "manager" %}
+            <div class="filter-group" style="border-left: 2px solid #ccc; padding-left: 10px; margin-left: 10px;">
+                <label> Flight ID</label>
+                <input type="text" name="flight_id" placeholder="Flight ID" value="{{ request.args.get('flight_id', '') }}">
+            </div>
+
+            <div class="filter-group">
+                <label>Plane ID</label>
+                <input type="text" name="plane_id" placeholder="Plane ID" value="{{ request.args.get('plane_id', '') }}">
+            </div>
+
+            <div class="filter-group">
+                <label>Status</label>
+                <select name="status" class="filter-select">
+                    <option value="">All Statuses</option>
+                    <option value="Scheduled" {% if request.args.get('status') == 'Scheduled' %}selected{% endif %}>Scheduled</option>
+                    <option value="Landed" {% if request.args.get('status') == 'Landed' %}selected{% endif %}>Landed</option>
+                    <option value="Fully Booked" {% if request.args.get('status') == 'Fully Booked' %}selected{% endif %}>Fully Booked</option>
+                    <option value="Cancelled" {% if request.args.get('status') == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                </select>
+            </div>
+            {% endif %}
+
+            <div style="flex-basis: 100%; margin-top: 10px;">
+                <button class="btn btn-blue" type="submit">Filter</button>
+                <a class="btn btn-gray" href="/flights">Clear</a>
+            </div>
+        </form>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Flight ID</th>
+                        {% if user_type == "manager" %}
+                            <th>Plane ID</th>
+                            <th>Plane Size</th>
+                            <th>Manufacturer</th>
+                        {% endif %}
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Status</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for f in flights %}
+                    <tr>
+                        <td class="flight-id-cell"><b>{{ f.FlightID }}</b></td>
+                        {% if user_type == "manager" %}
+                            <td>{{ f.PlaneID }}</td>
+                            <td>{{ f.PlaneSize }}</td>
+                            <td>{{ f.Manufacturer }}</td>
+                        {% endif %}
+                        <td>{{ f.DepartureDate }} {{ f.DepartureTime }}</td>
+                        <td>{{ f.ArrivalDate }} {{ f.ArrivalTime }}</td>
+                        <td>{{ f.SourceAirport }}</td>
+                        <td>{{ f.DestinationAirport }}</td>
+                        <td>
+                            <span class="status-badge
+                                {% if f.FlightStatus == 'Scheduled' or f.FlightStatus == 'Active' %}status-scheduled
+                                {% elif f.FlightStatus == 'Cancelled' %}status-cancelled
+                                {% elif f.FlightStatus == 'Landed' %}status-landed
+                                {% elif f.FlightStatus == 'Fully Booked' %}status-booked{% endif %}">
+                                {{ f.FlightStatus }}
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            {% if user_type == "manager" %}
+                                {% if (f.FlightStatus == 'Scheduled' or f.FlightStatus == 'Fully Booked') and f.allow_cancel %}
+                                    <a class="btn btn-gray small" href="/cancel_flight?flight_id={{ f.FlightID }}">Cancel</a>
+                                {% else %}
+                                    {% if (f.FlightStatus == 'Scheduled' or f.FlightStatus == 'Fully Booked') and not f.allow_cancel %}
+                                        <span class="text-muted small" title="Less than 72h to departure">Too late to cancel</span>
+                                    {% else %}
+                                        <span class="text-muted small" style="opacity: 0.5;">No Action</span>
+                                    {% endif %}
+                                {% endif %}
+                            {% else %}
+                                <a class="btn btn-blue small" href="/book?flight_id={{ f.FlightID }}">Book Now</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="summary-card">
+    <h2>Final Booking Summary</h2>
+
+    <div class="section">
+        <h3>Passenger Details</h3>
+        <p><strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}</p>
+        <p><strong>Email:</strong> {{ customer.email }}</p>
+        {% if customer.phones %}
+            <p><strong>Phone:</strong> {{ customer.phones[0] }}</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h3>Flight Information</h3>
+        <p><strong>Flight ID:</strong> {{ flight.FlightID }}</p>
+        <p><strong>Route:</strong> {{ flight.SourceAirport }} <span style="color:#aaa;">➝</span> {{ flight.DestinationAirport }}</p>
+        <p><strong>Departure:</strong> {{ flight.DepartureDate }} at {{ flight.DepartureTime }}</p>
+    </div>
+
+    <div class="section">
+        <h3>Selected Seats</h3>
+        <ul>
+            {% for seat in seats %}
+                <li>
+                    <span>{{ seat.ClassType }} Class</span>
+                    <span>Row {{ seat.RowNumber }}, Col {{ seat.ColNumber }} ({{ seat.Price }}₪)</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="total-section">
+        <p style="font-size: 14px; color: #64748b; margin-bottom: 0;">Total Amount</p>
+        <div class="total-price">{{ total_cost }} ₪</div>
+
+        <form action="/book_summary" method="POST">
+            <button type="submit" class="confirm-btn">Confirm and Complete Booking</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

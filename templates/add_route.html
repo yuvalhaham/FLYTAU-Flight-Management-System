@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>FlyTau - Create New Route</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_route.css') }}">
+</head>
+<body class="page">
+    <div class="topbar">
+        <div>Admin: <b>Add Flight Path</b></div>
+        <div class="topbar-actions">
+            <a class="btn btn-blue small" href="/flights">Back to Flights</a>
+        </div>
+    </div>
+
+    <div class="centered-container">
+        <h1 class="form-title">Create New Route</h1>
+
+        <div class="route-card">
+            {% if message %}
+                <div class="error-banner">
+                    {{ message }}
+                </div>
+            {% endif %}
+
+            <form method="POST" action="/add_route">
+                <div class="input-group">
+                    <label class="field-label">Origin Airport</label>
+                    <input type="text" name="origin" class="custom-input" placeholder="e.g. TLV" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label">Destination Airport</label>
+                    <input type="text" name="destination" class="custom-input" placeholder="e.g. JFK" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label">Flight Duration (Hours)</label>
+                    <input type="number" name="duration" class="custom-input" step="any" placeholder="e.g. 11.5" required>
+                </div>
+
+                <button class="btn btn-blue submit-btn" type="submit">Save Route</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

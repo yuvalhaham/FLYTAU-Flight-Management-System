@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crew Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="page">
+
+    <nav class="topbar">
+        <div class="logo">
+            <h2 style="color: #007bff; margin: 0;">Crew Roster</h2>
+        </div>
+        <div class="topbar-actions">
+             <a class="btn btn-blue small" href="/flights"> Back to Flights </a>
+             <a class="btn btn-gray small" href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <h1 class="flights-title" style="text-align: center;">Crew Management Dashboard</h1>
+
+        <div class="card">
+
+            <form class="filters" method="GET" action="/crew">
+
+                <div class="filter-group">
+                    <label>Employee Type</label>
+                    <select name="role" class="filter-select">
+                        <option value="">All Roles</option>
+                        <option value="Pilot" {% if request.args.get('role') == 'Pilot' %}selected{% endif %}>Pilot</option>
+                        <option value="Attendant" {% if request.args.get('role') == 'Attendant' %}selected{% endif %}>Flight Attendant</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Training Level</label>
+                    <select name="training" class="filter-select">
+                        <option value="">All Levels</option>
+                        <option value="1" {% if request.args.get('training') == '1' %}selected{% endif %}>YES</option>
+                        <option value="0" {% if request.args.get('training') == '0' %}selected{% endif %}>NO</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Current Status</label>
+                    <select name="status" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="Available" {% if request.args.get('status') == 'Available' %}selected{% endif %}>Available</option>
+                        <option value="Busy" {% if request.args.get('status') == 'Busy' %}selected{% endif %}>Busy / On Flight</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; gap: 10px; align-items: flex-end;">
+                    <button class="btn btn-blue" type="submit" style="height: 42px;">Filter</button>
+                    <a class="btn btn-gray" href="/crew" style="height: 42px; display: inline-flex; align-items: center;">Clear</a>
+                </div>
+            </form>
+
+            <table style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Training</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in crew %}
+                    <tr>
+                        <td><b>{{ c.ID }}</b></td>
+                        <td>{{ c.FirstName }} {{ c.LastName }}</td>
+                        <td>
+                            {% if c.Role == 'Pilot' %}
+                                👨‍✈️ Pilot
+                            {% else %}
+                                💁‍♀️ Attendant
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if c.Status == 'Available' %}
+                                <span class="status-badge status-landed">Available</span>
+                            {% else %}
+                                <span class="status-badge status-cancelled">Busy / In Air</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if c.TrainingPassed %}
+                                <span class="status-badge status-scheduled">YES</span>
+                            {% else %}
+                                <span style="color: #94a3b8; font-size: 13px;">NO</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if not crew %}
+                <div style="padding: 40px; text-align: center; color: #64748b;">
+                    <div style="font-size: 30px; margin-bottom: 10px;">🔍</div>
+                    No crew members found matching your filters.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

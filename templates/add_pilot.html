@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Pilot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="page">
+
+<div class="container">
+    <div class="card card-narrow">
+
+        <h2>Add New Pilot</h2>
+
+        {% if error %}
+            <div class="error-message">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="/add_pilot">
+
+            <div class="form-group">
+                <label>Pilot ID</label>
+                <input type="text" name="pilot_id" required placeholder="e.g., 300123456"
+                       pattern="[0-9]{9}" maxlength="9" title="ID must be exactly 9 digits">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-1">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" required>
+                </div>
+                <div class="form-group col-1">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" required pattern="[0-9\-]+" title="Numbers and hyphens only">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-2">
+                    <label>City</label>
+                    <input type="text" name="city" required>
+                </div>
+                <div class="form-group col-2">
+                    <label>Street</label>
+                    <input type="text" name="street" required>
+                </div>
+                <div class="form-group col-1">
+                    <label>House No.</label>
+                    <input type="number" name="house_number" required min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Training Passed?</label>
+                <select name="training_passed">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="form-row" style="margin-top: 30px;">
+                <button type="submit" class="btn btn-blue col-1">Add Pilot</button>
+                <a href="/flights" class="btn btn-gray col-1">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

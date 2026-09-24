@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FlyTau - Select Seats</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="page seat-selection-page" dir="ltr">
+  <div class="container">
+    <div class="card">
+      <h2>Choose Seats for Flight {{ flight_id }}</h2>
+
+      {% if error %}<p class="error-message">{{ error }}</p>{% endif %}
+
+      <form method="POST" action="/book">
+        <input type="hidden" name="flight_id" value="{{ flight_id }}">
+
+        {% set row_tracker = namespace(current_row=1) %}
+
+        {% for cls in seatmap %}
+        <div class="class-box">
+          <div class="class-title">
+            <h3>{{ cls.ClassType }} Class</h3>
+            <span class="price-tag">{{ cls.TicketPrice }} ₪</span>
+          </div>
+
+          <div class="seat-grid" style="grid-template-columns: 36px repeat({{ cls.NumCols }}, 36px);">
+            <div class="corner"></div>
+
+            {% for c in range(1, cls.NumCols + 1) %}
+              <div class="col-label">{{ c }}</div>
+            {% endfor %}
+
+            {% for r in range(1, cls.NumRows + 1) %}
+              <div class="row-label">{{ row_tracker.current_row }}</div>
+
+              {% for c in range(1, cls.NumCols + 1) %}
+                {# יצירת מזהה ייחודי למושב #}
+                {% set seat_val = cls.ClassType ~ ":" ~ r ~ "-" ~ c %}
+                {% set unique_id = "cb_" ~ cls.ClassType ~ "_" ~ r ~ "_" ~ c %}
+
+                {# בדיקה אם המושב תפוס #}
+                {% set is_occ = seat_val in occupied %}
+
+                <input type="checkbox"
+                       id="{{ unique_id }}"
+                       name="seat_choice"
+                       value="{{ seat_val }}"
+                       class="seat-checkbox"
+                       {% if is_occ %}disabled{% endif %}>
+
+                <label for="{{ unique_id }}"
+                       class="seat {% if is_occ %}occupied{% else %}available{% endif %}">
+                </label>
+
+              {% endfor %}
+
+              {# קידום מונה השורות #}
+              {% set row_tracker.current_row = row_tracker.current_row + 1 %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="legend">
+          <div class="legend-item">
+            <span class="dot" style="background:#dcfce7; border:1px solid #bbf7d0;"></span> Available
+          </div>
+          <div class="legend-item">
+            <span class="dot" style="background:#007AFF;"></span> Selected
+          </div>
+          <div class="legend-item">
+            <span class="dot" style="background:#f1f5f9; border:1px solid #e2e8f0;"></span> Occupied
+          </div>
+        </div>
+
+        <div style="margin-top:30px; display:flex; gap:15px;">
+          <button class="btn btn-blue" type="submit">CONFIRM SEATS</button>
+          <a href="/flights" class="btn btn-gray">CANCEL</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

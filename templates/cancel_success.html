@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Flight Cancelled</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="page cancel-success-page"> <div class="container">
+        <div class="card">
+            <div class="status-icon">🗑️</div>
+            <h2>Flight Cancelled</h2>
+            <div class="message-box">
+                Flight <span class="highlight">{{ flight_id }}</span> and all related data (orders and seats) were successfully deleted from the system.
+            </div>
+            <a href="/flights" class="btn btn-gray">Back to Flight Management</a>
+        </div>
+    </div>
+</body>
+</html>

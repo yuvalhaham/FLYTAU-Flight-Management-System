@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cancel Order</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="page cancel-order-page" dir="ltr">
+  <div class="card">
+    <h2>Cancel Order</h2>
+
+    <form method="POST">
+      <div class="form-group">
+          <label>Order ID</label>
+          <input type="text" name="order_id" placeholder="Enter your order ID" required>
+      </div>
+      <button class="btn btn-cancel" type="submit">Cancel Order</button>
+    </form>
+
+    {% if error %}
+      <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    {% if success %}
+      <p class="status-badge status-landed" style="display: block; text-align: center; margin-top: 10px;">{{ success }}</p>
+    {% endif %}
+
+    <div class="footer">
+      <a href="/flights" style="color: #64748b; text-decoration: none; font-size: 14px; font-weight: 600;">← Back to Flights</a>
+    </div>
+  </div>
+</body>
+</html>

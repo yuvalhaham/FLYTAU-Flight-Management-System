@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Order Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="page order-details-page" dir="ltr">
+  <div class="card">
+    <h2>Order Details</h2>
+
+    {% if success_msg %}
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span class="status-badge status-landed">{{ success_msg }}</span>
+      </div>
+    {% endif %}
+
+    {% if error_msg %}
+      <div class="error-message">{{ error_msg }}</div>
+    {% endif %}
+
+    <div class="details-list">
+        <div class="detail-item"><b>Order ID:</b> <span class="detail-value">#{{ order.OrderID }}</span></div>
+        <div class="detail-item"><b>Email:</b> <span class="detail-value">{{ order.CustomerEmail }}</span></div>
+        <div class="detail-item"><b>Flight ID:</b> <span class="detail-value">#{{ order.FlightID }}</span></div>
+        <div class="detail-item">
+            <b>Status:</b>
+            <span class="status-badge {% if order.OrderStatus == 'Cancelled' %}status-cancelled{% else %}status-scheduled{% endif %}">
+                {{ order.OrderStatus }}
+            </span>
+        </div>
+        <div class="detail-item"><b>Total Cost:</b> <span class="detail-value">{{ order.TotalCost }} ₪</span></div>
+        <div class="detail-item"><b>Departure:</b> <span class="detail-value">{{ order.DepartureDate }} | {{ order.DepartureTime }}</span></div>
+    </div>
+
+    <h3 style="margin-top: 30px; font-size: 1.1rem; color: #1e293b;">Selected Seats</h3>
+
+    {% if seats and seats|length > 0 %}
+      <ul>
+        {% for s in seats %}
+          <li>
+              <span><b>Row {{ s.RowNumber }}</b>, Col {{ s.ColNumber }}</span>
+              <span class="text-blue-bold">{{ s.ClassType }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="notice-box">No seats reserved (order was cancelled).</p>
+    {% endif %}
+
+    {% if can_cancel %}
+      <form method="POST" action="/guest_cancel_order"
+            onsubmit="return confirm('Are you sure you want to cancel this order?');"
+            style="margin-top: 20px;">
+        <input type="hidden" name="order_id" value="{{ order.OrderID }}">
+        <input type="hidden" name="email" value="{{ order.CustomerEmail }}">
+
+        <button class="btn btn-danger" type="submit">Cancel Order</button>
+      </form>
+      <p class="muted" style="margin-top: 10px; font-size: 12px;">Note: Cancellation is only allowed up to 36 hours before departure.</p>
+    {% else %}
+      <div class="notice-box">
+        ⚠️ Cancellation is not available (time limit exceeded or already cancelled).
+      </div>
+    {% endif %}
+
+    <div class="footer-actions">
+      <a href="/guest_my_order" class="btn btn-gray" style="width: auto;">← Back</a>
+      <a href="/flights" class="btn btn-gray" style="width: auto;">Flights List</a>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>FlyTau - Register Step 2</title>
+</head>
+<body dir="ltr" class="page">
+    <div class="split-container">
+        <div class="left-side">
+            <div class="badge">ALMOST DONE</div>
+            <h1>Contact Info</h1>
+            <p>Step 2: Add your phone numbers</p>
+        </div>
+
+        <div class="right-side scrollable-content">
+            <div class="content-box">
+                <h2>Phone Numbers</h2>
+                <p style="color: #64748b; margin-bottom: 20px;">
+                    You chose to add <b>{{ data.phone_count }}</b> phone numbers.
+                </p>
+
+                <form method="POST" action="/register">
+                    <input type="hidden" name="step" value="2">
+
+                    <input type="hidden" name="first_name" value="{{ data.first_name }}">
+                    <input type="hidden" name="last_name" value="{{ data.last_name }}">
+                    <input type="hidden" name="email" value="{{ data.email }}">
+                    <input type="hidden" name="password" value="{{ data.password }}">
+                    <input type="hidden" name="passport_number" value="{{ data.passport_number }}">
+                    <input type="hidden" name="birth_date" value="{{ data.birth_date }}">
+
+                    <div class="staff-section">
+                        <div class="phone-grid">
+                            {% for i in range(data.phone_count) %}
+                                <div class="form-group">
+                                    <label>PHONE #{{ i + 1 }} {% if i == 0 %}(REQUIRED){% endif %}</label>
+
+                                    <input type="text"
+                                           name="phones"
+                                           pattern="[0-9\-]+"
+                                           title="Numbers and hyphens only"
+                                           placeholder="Enter phone number"
+                                           {% if i == 0 %} required {% endif %}
+                                    >
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button class="btn btn-blue btn-submit" type="submit">COMPLETE REGISTRATION</button>
+                        <a href="/register" class="btn btn-gray">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Order (Guest)</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body class="page guest-order-page" dir="ltr">
+  <div class="card">
+    <h2>My Order (Guest)</h2>
+
+    <form method="POST" action="/guest_my_order">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Order ID</label>
+        <input type="text" name="order_id" placeholder="Enter your order ID" required>
+      </div>
+
+      <button class="btn btn-blue" type="submit">Search Order</button>
+    </form>
+
+    {% if error %}
+      <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    <div class="footer">
+      <a href="/flights" style="color: #64748b; text-decoration: none; font-size: 14px; font-weight: 600;">
+        ← Back to Flights
+      </a>
+    </div>
+  </div>
+</body>
+</html>

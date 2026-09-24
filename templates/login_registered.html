@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>FlyTau - Customer Login</title>
+</head>
+<body dir="ltr">
+    <div class="split-container">
+        <div class="left-side">
+            <div class="badge">CUSTOMERS</div>
+            <h1>Welcome Back</h1>
+            <p>Log in to manage your bookings and explore new destinations.</p>
+        </div>
+
+        <div class="right-side">
+            <div class="content-box">
+                <img src="{{ url_for('static', filename='flytau_logo.jpeg') }}" class="logo">
+                <h2>Customer Login</h2>
+
+                {% if error %}
+                    <p class="error-message">{{ error }}</p>
+                {% endif %}
+
+                <form method="POST">
+                    <div class="form-group">
+                        <label>EMAIL ADDRESS</label>
+                        <input type="text" name="email" placeholder="example@mail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>PASSWORD</label>
+                        <input type="password" name="password" placeholder="Enter Password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-blue" style="margin-top: 20px;">LOGIN</button>
+                </form>
+
+                <div style="margin-top: 20px;">
+                    <a href="/register" style="color: #007AFF; text-decoration: none; font-size: 14px; margin-right: 15px;">Create Account</a>
+                    <a href="/" style="color: #64748b; text-decoration: none; font-size: 14px;">Back to Welcome Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

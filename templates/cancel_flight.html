@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cancel Flight</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="page cancel-flight-page" dir="ltr">
+  <div class="card">
+    <h2>Cancel Flight</h2>
+
+    <div class="warning-text">
+        <strong>Warning:</strong> You are about to cancel this flight. This action will notify all booked passengers and cannot be undone.
+    </div>
+
+    <form method="POST" action="/cancel_flight">
+      <div class="form-group">
+          <label>Flight ID to Cancel</label>
+          <input type="text" name="flight_id" value="{{ flight_id }}" required readonly>
+      </div>
+
+      <button class="btn btn-cancel" type="submit">CONFIRM CANCELLATION</button>
+    </form>
+
+    <div class="footer">
+      <a href="/flights" style="color: #64748b; text-decoration: none; font-size: 14px; font-weight: 600;">← Back to Flight List</a>
+    </div>
+  </div>
+</body>
+</html>

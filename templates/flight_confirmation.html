@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Flight Confirmed - FlyTau</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="page order-success-page" dir="ltr">
+
+  <div class="container">
+    <div class="card center">
+
+      <div class="big-icon">✅</div>
+
+      <h2 class="success-title">Flight Created Successfully</h2>
+      <p style="color: #64748b; margin-bottom: 30px;">The new flight has been scheduled and crew assignments are saved.</p>
+
+      <div class="order-details">
+          <p>
+            <span style="color: #64748b;">Flight ID:</span>
+            <b style="color: #0f172a;">{{ flight.FlightID }}</b>
+          </p>
+          <p style="margin-bottom: 0;">
+            <span style="color: #64748b;">Status:</span>
+            <b style="color: #15803d;">Scheduled</b>
+          </p>
+      </div>
+
+      <div class="action-stack">
+          <a class="btn btn-blue" href="/flights">Back to Flights List</a>
+          <a class="btn btn-gray" href="/add_flight">Create Another Flight</a>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

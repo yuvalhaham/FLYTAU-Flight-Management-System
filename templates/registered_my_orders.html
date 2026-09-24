@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Orders</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="page" dir="ltr">
+
+<div class="card">
+  <h2>My Orders</h2>
+  <p class="muted">Signed in as: <b>{{ email }}</b></p>
+
+  {% if success %}<p class="success">{{ success }}</p>{% endif %}
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+  <form method="GET" action="/my_orders" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
+      <label style="margin:0; font-weight: bold;">Filter by Status:</label>
+      <select name="status" class="filter-select" style="width: auto; padding: 8px;">
+          <option value="">All Orders</option>
+          <option value="Confirmed" {% if current_status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+          <option value="Client Cancelled" {% if current_status == 'Client Cancelled' %}selected{% endif %}>Client Cancelled</option>
+          <option value="CancelledBySystem" {% if current_status == 'CancelledBySystem' %}selected{% endif %}>Cancelled By System</option>
+          <option value="Completed" {% if current_status == 'Completed' %}selected{% endif %}>Completed</option>
+      </select>
+      <button class="btn btn-blue small" type="submit" style="margin:0; height: 38px;">Filter</button>
+      <a href="/my_orders" class="btn btn-gray small" style="margin:0; height: 38px; line-height: 22px;">Clear</a>
+  </form>
+  {% if orders and orders|length > 0 %}
+    <table>
+      <tr>
+        <th>OrderID</th>
+        <th>FlightID</th>
+        <th>Status</th>
+        <th>Order Date</th>
+        <th>Total Cost</th>
+        <th>Departure</th>
+        <th>Action</th>
+      </tr>
+
+      {% for o in orders %}
+      <tr>
+        <td>{{ o.OrderID }}</td>
+        <td>{{ o.FlightID }}</td>
+        <td>
+            <span class="status-badge
+                {% if o.OrderStatus == 'Confirmed' %}status-scheduled
+                {% elif o.OrderStatus == 'Completed' %}status-landed
+                {% else %}status-cancelled{% endif %}">
+                {{ o.OrderStatus }}
+            </span>
+        </td>
+        <td>{{ o.OrderDate }}</td>
+        <td>{{ o.TotalCost }}</td>
+        <td>{{ o.DepartureDate }} {{ o.DepartureTime }}</td>
+        <td>
+          {% if o.can_cancel %}
+            <form method="POST" action="/registered_cancel_order"
+                  onsubmit="return confirm('Are you sure you want to cancel this order?');"
+                  style="margin:0;">
+              <input type="hidden" name="order_id" value="{{ o.OrderID }}">
+              <button class="btn small" style="background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;" type="submit">Cancel</button>
+            </form>
+          {% else %}
+            <span class="muted">Not available</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p class="muted" style="margin-top:12px;">
+      Cancellation is allowed only if there are at least 36 hours before departure.
+      When cancelled: seats are removed, cost becomes 5% of original, status becomes "Client Cancelled".
+    </p>
+  {% else %}
+    <p class="muted" style="margin-top: 20px;">No orders found matching your criteria.</p>
+  {% endif %}
+
+  <div class="footer" style="margin-top: 20px;">
+    <a href="/flights">Back to Flights</a>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>FlyTau - Register Step 1</title>
+</head>
+<body dir="ltr" class="page">
+    <div class="split-container">
+        <div class="left-side">
+            <div class="badge">JOIN US</div>
+            <h1>Create Account</h1>
+            <p>Step 1: Personal Details</p>
+        </div>
+
+        <div class="right-side scrollable-content">
+            <div class="content-box">
+                <h2>Registration</h2>
+
+                {% if error %}
+                    <p class="error-message">{{ error }}</p>
+                {% endif %}
+
+                <form method="POST" action="/register">
+                    <input type="hidden" name="step" value="1">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>FIRST NAME (REQUIRED)</label>
+                            <input type="text" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>LAST NAME (REQUIRED)</label>
+                            <input type="text" name="last_name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>EMAIL (REQUIRED)</label>
+                        <input type="email" name="email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>PASSWORD (REQUIRED)</label>
+                            <input type="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>PASSPORT NUMBER (REQUIRED)</label>
+                            <input type="text" name="passport_number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>BIRTH DATE (REQUIRED)</label>
+                        <input type="date" name="birth_date" class="full-width" required>
+                    </div>
+
+                    <div class="staff-section">
+                        <label>PHONE NUMBERS</label>
+                        <p class="section-help">How many phone numbers do you want to add?</p>
+
+                        <div class="form-group">
+                            <input type="number" name="phone_count" value="1" min="1" max="20" required
+                                   style="width: 100px; text-align: center;">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-blue btn-submit" type="submit">NEXT STEP</button>
+                </form>
+
+                <div class="back-link">
+                    <a href="/">Back to Welcome Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

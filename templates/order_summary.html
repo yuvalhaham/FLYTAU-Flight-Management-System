@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Order Summary</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="page order-summary-page" dir="ltr">
+  <div class="card">
+    <h2>Order Summary</h2>
+
+    <div class="flight-info-banner">
+        <div>
+            <p style="margin:0; font-size: 12px; color: #64748b; text-transform: uppercase;">Flight Number</p>
+            <span class="flight-id">#{{ flight_id }}</span>
+        </div>
+        <div style="text-align: right;">
+            <p style="margin:0; font-size: 12px; color: #64748b; text-transform: uppercase;">Status</p>
+            <span class="status-badge status-scheduled">Awaiting Confirmation</span>
+        </div>
+    </div>
+
+    <h3>Selected Seats</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Row</th>
+          <th>Seat Number</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for seat in selected_seats %}
+        <tr>
+          <td><b>{{ seat.class_type }}</b></td>
+          <td>{{ seat.row }}</td>
+          <td>{{ seat.col }}</td>
+          <td>{{ seat.price }} ₪</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="total-section">
+        <span class="total-label">Total Amount:</span>
+        <span class="total-amount">{{ total_price }} ₪</span>
+    </div>
+
+    <div class="actions">
+      <form method="POST" action="/confirm_order" style="flex: 2;">
+        <input type="hidden" name="flight_id" value="{{ flight_id }}">
+        <button type="submit" class="btn btn-blue" style="margin-bottom:0;">CONFIRM & PAY</button>
+      </form>
+      <a href="/flights" class="btn btn-gray" style="flex: 1; margin-bottom:0;">Cancel</a>
+    </div>
+  </div>
+</body>
+</html>

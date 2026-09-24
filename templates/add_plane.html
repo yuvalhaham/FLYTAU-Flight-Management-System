@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Plane</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="page">
+
+<div class="container">
+    <div class="card card-narrow">
+        <h2>Add New Plane</h2>
+
+        {% if error %}
+            <div class="error-message">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="/add_plane">
+
+            <div class="form-section">
+                <h3>General Information</h3>
+
+                <div class="form-group">
+                    <label>Plane ID</label>
+                    <input type="text" name="plane_id" required placeholder="e.g. P-100">
+                </div>
+
+                <div class="form-group">
+                    <label>Manufacturer</label>
+                    <select name="manufacturer" required>
+                        <option value="" disabled selected>Select Manufacturer</option>
+                        <option value="Boeing">Boeing</option>
+                        <option value="Airbus">Airbus</option>
+                        <option value="Dassault">Dassault</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Purchase Date</label>
+                    <input type="date" name="purchase_date" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Seating Configuration</h3>
+
+                <div class="form-group">
+                    <label>Plane Size</label>
+                    <select name="plane_size">
+                        <option value="Small">Small (Economy Only)</option>
+                        <option value="Large">Large (Business + Economy)</option>
+                    </select>
+                </div>
+
+                <h4>Economy Class (Required)</h4>
+                <div class="form-row">
+                    <div class="form-group col-1">
+                        <label>Rows</label>
+                        <input type="number" name="eco_rows" min="1" required placeholder="e.g. 20">
+                    </div>
+                    <div class="form-group col-1">
+                        <label>Columns</label>
+                        <input type="number" name="eco_cols" min="1" required placeholder="e.g. 6">
+                    </div>
+                </div>
+
+                <h4>Business Class (Large Planes Only)</h4>
+                <div class="form-row">
+                    <div class="form-group col-1">
+                        <label>Rows</label>
+                        <input type="number" name="bus_rows" min="0" placeholder="e.g. 5">
+                    </div>
+                    <div class="form-group col-1">
+                        <label>Columns</label>
+                        <input type="number" name="bus_cols" min="0" placeholder="e.g. 4">
+                    </div>
+                </div>
+                <p class="help-text">* Leave empty for Small planes.</p>
+            </div>
+
+            <div class="form-row">
+                <button type="submit" class="btn btn-blue col-1">Add Plane</button>
+                <a href="/flights" class="btn btn-gray col-1">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
